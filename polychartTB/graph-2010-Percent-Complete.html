@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Thunderbird Support Metrics 1 January - 31 December 2010 Percentage COMPLETE</title>
+</head>
+<body>
+<div id="graph"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="underscore-min.js"></script>
+<script src="d3.js"></script>
+<script src="d3.csv.js"></script>
+<script src="polycharthack.js"></script>
+
+<script type="text/javascript">//<![CDATA[
+(function($){
+  $.ajaxSetup({
+    cache: false // turn off AJAX caching
+  });
+gg.data.fetch("tb-percent-closed-2010.csv", function(data) {
+  gg.graph(data)
+    .layer(gg.layer.line()
+            .map('x', 'Month')
+            .map('y', 'Percent'))
+    .scale('y', gg.scale.continuous('linear').min(0).max(100))
+    .opts('width', 800).opts('height', 600)
+    .opts('title', 'Thunderbird Support Topics %Complete 1Jan-31Dec2010')
+    .opts('label-x', 'Month').opts('label-y', '%Closed')
+    .render('#graph')
+});
+})(jQuery);
+//]]></script>
+
+</body>
